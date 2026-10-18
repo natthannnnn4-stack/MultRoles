@@ -1,3 +1,4 @@
+
 using System;
 
 namespace MultRoles
@@ -38,6 +39,6 @@ namespace MultRoles
                 return SheriffShotResult.HitImpostor;
 
             return SheriffShotResult.Misfire;
+        }
     }
-}
 }
