@@ -37,4 +37,7 @@ namespace MultRoles
             if (targetIsImpostor)
                 return SheriffShotResult.HitImpostor;
 
-            return SheriffShotResult
+            return SheriffShotResult.Misfire;
+    }
+}
+}
