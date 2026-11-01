@@ -1,4 +1,3 @@
-
 namespace MultRoles
 {
     public enum SheriffShotResult
@@ -15,7 +14,7 @@ namespace MultRoles
     {
         public const float CooldownSeconds = 30f;
 
-        private float nextShotTime;
+        private float nextShotTime = 0f;
 
         public float GetRemainingCooldown(float currentTime)
         {
