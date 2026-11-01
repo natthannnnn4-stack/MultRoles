@@ -1,4 +1,3 @@
-using System;
 
 namespace MultRoles
 {
@@ -7,6 +6,7 @@ namespace MultRoles
         Cooldown,
         Meeting,
         NoTarget,
+        InvalidTime,
         HitImpostor,
         Misfire
     }
@@ -15,7 +15,15 @@ namespace MultRoles
     {
         public const float CooldownSeconds = 30f;
 
-        private float nextShotTime = 0f;
+        private float nextShotTime;
+
+        public float GetRemainingCooldown(float currentTime)
+        {
+            if (!float.IsFinite(currentTime))
+                return CooldownSeconds;
+
+            return Math.Max(0f, nextShotTime - currentTime);
+        }
 
         public SheriffShotResult TryShoot(
             float currentTime,
@@ -23,6 +31,9 @@ namespace MultRoles
             bool hasTarget,
             bool targetIsImpostor)
         {
+            if (!float.IsFinite(currentTime))
+                return SheriffShotResult.InvalidTime;
+
             if (meetingActive)
                 return SheriffShotResult.Meeting;
 
@@ -34,10 +45,9 @@ namespace MultRoles
 
             nextShotTime = currentTime + CooldownSeconds;
 
-            if (targetIsImpostor)
-                return SheriffShotResult.HitImpostor;
-
-            return SheriffShotResult.Misfire;
+            return targetIsImpostor
+                ? SheriffShotResult.HitImpostor
+                : SheriffShotResult.Misfire;
         }
     }
 }
