@@ -9,5 +9,8 @@ public class MultRolesPlugin : BasePlugin
     public override void Load()
     {
         Log.LogInfo("MultRoles carregado!");
+
+        Log.LogInfo("Sheriff preparado!");
+        Log.LogInfo("Cooldown: 30 segundos");
     }
 }
