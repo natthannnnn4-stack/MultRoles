@@ -2,23 +2,36 @@
 name: Build MultRoles
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Baixar o projeto
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Instalar .NET
+      - name: Install .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: 6.0.x
 
-      - name: Compilar
-        run: dotnet build MultRoles.csproj --configuration Release
+      - name: Restore
+        run: dotnet restore MultRoles.csproj
+
+      - name: Build
+        run: dotnet build MultRoles.csproj --configuration Release --no-restore
+
+      - name: Upload DLL
+        uses: actions/upload-artifact@v4
+        with:
+          name: MultRoles-IL2CPP
+          path: bin/Release/net6.0/MultRoles.dll
+          if-no-files-found: error
+          retention-days: 14
