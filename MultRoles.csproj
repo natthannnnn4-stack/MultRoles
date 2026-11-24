@@ -1,9 +1,15 @@
+
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>MultRoles</AssemblyName>
     <RootNamespace>MultRoles</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AllOfUs.MiraAPI" Version="0.6.0" />
+  </ItemGroup>
 </Project>
